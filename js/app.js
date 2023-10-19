@@ -2,6 +2,7 @@ const criptomonedasSelect = document.querySelector('#criptomonedas');
 const monedaSelect = document.querySelector('#moneda');
 
 const formulario = document.querySelector('#formulario');
+const resultado = document.querySelector('#resultado');
 
 const objBusqueda = {
     moneda:'',
@@ -93,5 +94,37 @@ function consultarAPI(){
 }
 
 function mostrarCotizacionHTML(cotizacion){
-    console.log(cotizacion)
+
+    limpiarHTML();
+    
+    const {PRICE, HIGHDAY, LOWDAY, CHANGEPCY24HOUR, LASTUPDATE} = cotizacion;
+
+    const precio = document.createElement('p')
+    precio.classList.add('precio');
+    precio.innerHTML = `El valor es :<span>${PRICE}</span>`;
+
+    const precioHight = document.createElement('p'); 
+    precioHight.innerHTML = `Precio más alto del día :<span>${HIGHDAY}</span>`;
+
+    const precioLow = document.createElement('p'); 
+    precioLow.innerHTML = `Precio más bajo del día :<span>${LOWDAY}</span>`;
+
+    const variacion24hs = document.createElement('p'); 
+    variacion24hs.innerHTML = `Variación últimas 24hs :<span>${CHANGEPCY24HOUR}</span>`;
+
+    const ultimaActualizacion = document.createElement('p');
+    ultimaActualizacion.innerHTML = `Última actualización :<span>${LASTUPDATE}</span>`
+    
+    resultado.appendChild(precio)
+    resultado.appendChild(precioHight)
+    resultado.appendChild(precioLow)
+    resultado.appendChild(variacion24hs)
+    resultado.appendChild(ultimaActualizacion)
+
+}
+
+function limpiarHTML(){
+    while(resultado.firstChild){
+        resultado.removeChild(resultado.firstChild);
+    }
 }
