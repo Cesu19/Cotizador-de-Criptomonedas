@@ -46,6 +46,7 @@ function leerValor(e){
 }
 
 function submitFomulario(e) {
+    
     e.preventDefault();
 
     // Validar
@@ -55,8 +56,26 @@ function submitFomulario(e) {
         mostrarAlerta('Ambos campos son obligatorios');
         return;
     }
+
+    // Consultar la API con los resultados
 }
 
 function mostrarAlerta(msg) {
-    console.log(msg)
+    const existeError = document.querySelector('.error');
+
+    if(!existeError){
+        const divMensaje = document.createElement('div');
+        divMensaje.classList.add('error');
+    
+        //Mensaje de error
+        divMensaje.textContent = msg;
+    
+        formulario.appendChild(divMensaje);
+    
+        setTimeout( () =>{
+            divMensaje.remove();
+        },3000);
+    }
+  
 }
+
